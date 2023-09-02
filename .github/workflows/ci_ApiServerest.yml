@@ -44,9 +44,12 @@ jobs:
           name: report
           path: ./docs/index.html
 
-      - name: Step 5 Deploy do Report.html
+      - name: Passo 5 - Armazenar relatório html
+        uses: actions/upload-artifact@v3
+        # expressão condicional para que sempre seja executado independentemente dos resultados dos steps anteriores
         if: ${{ always() }}
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: ./docs
+        with: 
+            name: report-api-user-ci
+            path: ./reports/report-api-user-ci.html
+            # armazena o relatório html por 30 dias
+            retention-days: 30
